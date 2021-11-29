@@ -1,0 +1,18 @@
+Projeto final: Pokedex
+
+Gerar Pokedex dinâmicamente, com lista de tipos que permite filtrar ao clique
+
+O que tenho? Uma array de objetos, html e css
+
+Principais problemas? Como pegar os elementos da array?
+
+Possiveis soluções (e problemas)
+
+ - Salvar todos os elementos numa 'const' e ir dando append de tudo no final? (const X = document.querySelectorAll('ELEMENTO'))
+
+ - É possível dar append no card inteiro? (no card como um todo)
+
+  - Como dar append em tudo isso e ficar na ordem?
+
+  - Como fazer o filtro de tipo?
+
