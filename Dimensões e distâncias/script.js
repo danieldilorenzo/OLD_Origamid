@@ -1,70 +1,110 @@
 /**
- *  forEach
  *
- * Método que é utilizado de Array
+ * Height e Width
  *
- *  O primeiro parâmetro é o callback, ou seja, a funcção que será ativada
- *  a cada item. Essa função pode receber três parâmetros: valorAtual, index e  array
+ * São propriedades e métodos dos objetos Element e HTMLElement, a maioria delas são Read Only
  *
- * Alguns objetos que são array-like (parecem array) possuem esse método (NodeList possui, HTMLColection não)
+ * section.clientHeight   // height + padding (altura + preenchimento)
+ * section.offsetHeight   //  height + padding + border (altura, preenchimento e bordas)
+ * section.scrollHeight   //  height total, mesmo dentro do scroll
+ *
+ * Mesma coisa para o Width
+ *
+ *
+ * Height = Altura
+ * Width = Largura
  */
 
-// const imgs = document.querySelectorAll("img");
-// console.log(imgs);
+const listaAnimais = document.querySelector(".animais-lista");
+console.log(listaAnimais);
 
-// imgs.forEach(function (item, index, array) {
-//   console.log(item, index, array);
-// });
+const height = listaAnimais.scrollHeight;
+console.log(height);
 
 /**
  *
+ * Pegar a distância entre o topo do elemento e o topo da página
  *
- *"item" mostra cada imagem
- *"index" mostra a posição da imagem na array
- *"array" mostra todos os items da array
+ * offsetTop e offsetLeft
+ *
+ * offsetTop = distância entre o topo do elemento e o topo da página
+ * offsetLeft = distância entre o canto superior esquerdo do elemento,
+ * para o canto esquerdo da página
  *
  */
 
-const titulos = document.getElementsByClassName("titulo"); //criando uma constante que pega todos os títulos
-const titulosArray = Array.from(titulos); // transformando em Array
+const animaisTop = listaAnimais.offsetTop;
+console.log(animaisTop);
 
-titulosArray.forEach(function (item) {
-  console.log(item); // imprimindo todos os itens dessa Array
-});
+const raposah2_1 = document.querySelector("h2");
 
 /**
  *
- * Arrow function elimina a obrigatoriedade na maioria das vezes de se escrever "function
- * "
+ * getBoundingClientRect()
+ *
+ * Método que retorna um objeto com valores de width, height
+ * distâncias do elemento e mais
+ *
+ * Como se criasse um retângulo entre o elemento e mostrasse o
+ * tamanho do retângulo, e a distância dele sob os outros elementos
  */
 
-// titulosArray.forEach((item) => {
-//   console.log(item);
-// });
+const rect = raposah2_1.getBoundingClientRect();
+console.log(rect);
 
-// let i = 0;
-// imgs.forEach((item) => console.log(item));
+/**
+ *
+ * Window = janela do usuário
+ */
 
-// Mostre no console cada parágrafo do site
+console.log(
+  window.innerWidth,
+  window.innerHeight,
+  window.outerWidth /**pega o tamanho, mesmo com o console aberto */,
+  window.outerHeight,
+  window.pageYOffset /** quanto o eixo y (de cima a abaixo) já deu de scroll */,
+  window.pageXOffset /** quanto o eixo x (de um lado para outro) já deu de scroll */
+);
 
-const paragr = document.querySelectorAll("p");
-paragr.forEach((item) => console.log(item));
+if (rect.top < 0) {
+  console.log("Passou do elemento");
+}
+// dá um console.log quando o rect (aquele h2) passar do nível zero
 
-// Mostre o texto dos parágrafos no console
+const small = window.matchMedia("(max-width:600px)");
+console.log(small);
+// constante que retorna um valor booleano, no caso dando false se
+// o a tela é menor que 600
 
-paragr.forEach((item) => console.log(item.innerText));
+// Verifique a distância da primeira imagem
+// em relação ao topo da página
 
-// Como corrigir os erros abaixo
+const primeiraImg = document.querySelector("img");
+const imgTop = primeiraImg.offsetTop;
+console.log(imgTop);
 
-const imgs = document.querySelectorAll("img");
+// Retorne a soma da largura de todas as imagens
 
-imgs.forEach((item, index) => {
-  console.log(item, index);
-});
+function somaIMAGENS() {
+  const imagens = document.querySelectorAll("img");
+  let soma = 0;
+  imagens.forEach((imagem) => {
+    soma = soma + imagem.offsetWidth;
+  });
+  console.log(soma);
+}
+//console.log(imagem.offsetWidth);
 
-let i = 0;
-imgs.forEach(() => {
-  console.log(i++);
-});
+// window.onload = function () {
+//   somaIMAGENS;
+// };
 
-imgs.forEach(() => i++);
+// Se o browser for menor que 720px,
+// adicione a classe menu-mobile ao menu
+
+const browserSmall = window.matchMedia("max-width:720px").matches;
+
+if (browserSmall) {
+  const menu = document.querySelector(".menu");
+  menu.classList.add("menu-mobile");
+}
