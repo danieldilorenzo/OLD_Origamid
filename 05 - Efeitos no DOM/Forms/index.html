@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      label {
+        display: block;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        margin-top: 1rem;
+      }
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      input[type="text"],
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.5rem;
+        border: 2px solid #000;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      textarea {
+        height: 150px;
+      }
+      .inválido {
+        border-color: red;
+      }
+    </style>
+    <form name="contato" id="contato">
+      <label for="nome">Nome</label>
+      <input type="text" name="nome" id="nome" required />
+      <span class="erro"></span>
+      <label for="email">E-mail</label>
+      <input type="email" name="email" id="email" required />
+      <span class="erro"></span>
+      <label for="mensagem">Mensagem</label>
+      <textarea name="mensagem" id="mensagem"></textarea>
+      <select name="cores" id="cores">
+        <option value="rgb(24, 12, 90)">Roxo</option>
+        <option value="rgb(88, 13, 13)">Vermelho</option>
+      </select>
+      <input type="color" />
+      <input type="date" />
+      <input type="number" />
+      <input type="range" />
+      <input type="password" />
+    </form>
+    <script>
+      console.log(contato.elements.mensagem);
+      function handleKeyUp(event) {
+        const target = event.target;
+        if (!target.checkValidity()) {
+          target.classList.add("inválido");
+          target.setCustomValidity(
+            "Por favor, preencha esse campo. Ele é necessário para mim"
+          );
+          target.nextElementSibling.innerText = target.validationMessage;
+        }
+        console.log(event.target);
+      }
+      contato.addEventListener("keyup", handleKeyUp);
+
+      function MudarCor(event) {
+        document.body.style.backgroundColor = event.target.value;
+      }
+      contato.addEventListener("change", MudarCor);
+    </script>
+  </body>
+</html>
